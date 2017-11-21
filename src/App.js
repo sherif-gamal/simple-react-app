@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
+import { Switch } from 'react-router-dom';
+import Header from './components/Header';
+import {HomePage, LoginPage, SignupPage, PageNotFound} from './containers';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <div>
+          <Header loggedIn={this.props.loggedIn}/>
+          <div className='ui container'>
+            <Switch>
+              <Route exact path='/' component={HomePage}/>
+              <Route path='/login' component={LoginPage}/>
+              <Route path='/signup' component={SignupPage} />
+              <Route path="*" component={PageNotFound} />
+            </Switch>
+          </div>
+        </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    ...state,
+    loggedIn: true
+  };
+}
+
+export default connect(mapStateToProps)(App);
