@@ -12,7 +12,7 @@ import {
 import validator from 'validator';
 import InlineMessage from '../components/InlineMessage';
 
-class LoginForm extends Component {
+class SignupForm extends Component {
   state = {
     data: {
       firstName: "",
@@ -37,9 +37,9 @@ class LoginForm extends Component {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({errors});
-    // if (Object.keys(errors).length === 0) {
-    this.props.submit(this.state.data);
-    // }
+    if (Object.keys(errors).length === 0) {
+      this.props.submit(this.state.data);
+    }
   }
 
   validate(data) {
@@ -62,20 +62,21 @@ class LoginForm extends Component {
             Login
           </Header>
           <Form size='large'>
-            <Segment stacked="stacked">
-              <Form.Input fluid="fluid" icon='user' iconPosition='right' placeholder='E-mail address'/>
-              <Form.Input fluid="fluid" icon='lock' iconPosition='right' placeholder='Password' type='password'/>
+            <Segment stacked>
+              <Form.Input fluid icon='mail' placeholder='E-mail address' name='email' error={!!errors.email} onChange={this.onChange}/>
 
-              <Button color='teal' fluid="fluid" size='large'>Login</Button>
+              <Form.Input fluid icon='lock' placeholder='Password' type='password' name='password' error={!!errors.password} onChange={this.onChange}/>
+
+              <Button color='teal' fluid size='large' onClick={this.onSubmit}>Signup</Button>
             </Segment>
           </Form>
           <Message>
             Don't have an account?
-            <a href='/signup'>{' '}Create one here</a>
+            <a href='/signup'>{' '} Create one</a>
           </Message>
         </Grid.Column>
       </Grid>
     </div>)
   }
 }
-export default LoginForm;
+export default SignupForm;

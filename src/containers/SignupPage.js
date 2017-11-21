@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SignupForm from './SignupForm';
 
 class LoginPage extends Component {
-  submit = data => this.props.signup();
+  submit = data => this.props.signup(data);
 
   render() {
     return (

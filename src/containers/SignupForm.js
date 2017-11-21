@@ -37,9 +37,9 @@ class SignupForm extends Component {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({errors});
-    // if (Object.keys(errors).length === 0) {
-    this.props.submit(this.state.data);
-    // }
+    if (Object.keys(errors).length === 0) {
+      this.props.submit(this.state.data);
+    }
   }
 
   validate(data) {
@@ -81,31 +81,4 @@ class SignupForm extends Component {
     </div>)
   }
 }
-// <Form className='centered'>
-//     <Form.Field error={!!errors.firstName}>
-//       <label htmlFor="firstName">Email</label>
-//       <input type="text" name="firstName" placeholder="Jon" value={data.firstName} onChange={this.onChange} />
-//       {errors.firstName && <InlineMessage text={errors.firstName} />}
-//     </Form.Field>
-//
-//     <Form.Field error={!!errors.lastName}>
-//       <label htmlFor="lastName">Email</label>
-//       <input type="text" name="lastName" placeholder="Doe" value={data.lastName} onChange={this.onChange} />
-//       {errors.lastName && <InlineMessage text={errors.lastName} />}
-//     </Form.Field>
-//
-//     <Form.Field error={!!errors.email}>
-//       <label htmlFor="email">Email</label>
-//       <input type="email" name="email" placeholder="name@example.com" value={data.email} onChange={this.onChange} />
-//       {errors.email && <InlineMessage text={errors.email} />}
-//     </Form.Field>
-//
-//     <Form.Field error={!!errors.password}>
-//       <label htmlFor="password">Password</label>
-//       <input type="password" name="password" value={data.password} onChange={this.onChange} placeholder="Password"/>
-//       {errors.password && <InlineMessage text={errors.password} />}
-//     </Form.Field>
-//
-//     <Button primary onClick={this.onSubmit}>Login <Icon name='send'></Icon></Button>
-//   </Form>)
 export default SignupForm;

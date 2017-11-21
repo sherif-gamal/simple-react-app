@@ -20,7 +20,7 @@ export default class MenuExampleBasic extends Component {
   }
 
   render() {
-    const { searching, loggedIn } = this.state;
+    const { searching } = this.state;
     console.log(this.props);
     return (
       <Menu>
