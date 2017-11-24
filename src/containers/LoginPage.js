@@ -1,24 +1,29 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-import LoginForm from './LoginForm';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { REQUEST_LOGIN } from "../constants";
+import LoginForm from "./LoginForm";
 
 class LoginPage extends Component {
-  submit = data => this.props.login();
+  state = {};
+
+  submit = data => this.props.login(data);
 
   render() {
     return (
       <div>
-        <LoginForm submit={this.submit} />
+        <LoginForm submit={this.submit} error={this.state.error} />
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: () =>  console.log('logged Isdfsn')
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  login: data => {
+    dispatch({ type: REQUEST_LOGIN, payload: data });
+  }
+});
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+const mapStateToProps = state => ({
+  loginError: state.user.loginError
+});
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

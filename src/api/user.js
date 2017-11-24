@@ -1,8 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  user: {
-    login: credentials => axios.post('/api/users/login', {...credentials}).then(res => res.data.user),
-    logout: () => axios.post('/api/users/logout')
+  signup: data => axios.post("/api/Users", data),
+  login: credentials => axios.post("/api/Users/login", credentials),
+  logout: () => {
+    // todo fix
+    const token = localStorage.getItem("token");
+    axios.post(`/api/Users/logout?access_token=${token}`);
   }
-}
+};

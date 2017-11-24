@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-import SignupForm from './SignupForm';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { SIGNUP } from "../constants";
+import SignupForm from "./SignupForm";
 
 class LoginPage extends Component {
   submit = data => this.props.signup(data);
@@ -9,16 +9,20 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <SignupForm submit={this.submit} />
+        <SignupForm submit={this.submit} signupError={this.props.signupError} />
       </div>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signup: () =>  console.log('Signed up')
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  signup: data => dispatch({ type: SIGNUP, payload: data })
+});
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+const mapStateToProps = state => {
+  return {
+    signupError: state.user.signupError
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

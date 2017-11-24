@@ -1,6 +1,4 @@
-import { combineReducers } from 'redux';
-import user from './reducers/user';
+import { combineReducers } from "redux";
+import user from "./reducers";
 
-export default combineReducers({
-  user: () => ({})
-});
+export default combineReducers({ user });

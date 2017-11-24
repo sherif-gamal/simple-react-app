@@ -1,18 +1,16 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
-import { Users } from '../api';
+import { all, takeLatest } from "redux-saga/effects";
+import axios from "axios";
+import userSagas from "./userSagas";
+import resourceSagas from "./resourceSagas";
+import { UPDATE_AUTH_HEADER } from "../constants";
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* login(action) {
-   try {
-      const user = yield call(Users.login, action.payload);
-      yield put({type: "USER_LOGGED_IN", user: user});
-   } catch (e) {
-      yield put({type: "USER_LOGIN_FAILED", message: e.message});
-   }
+function* watchUpdateAuthHeader() {
+  yield takeLatest(UPDATE_AUTH_HEADER, action => {
+    if (!action.payload) delete axios.defaults.headers.common.Authorization;
+    else axios.defaults.headers.common.Authorization = action.payload;
+  });
 }
 
-function* userSaga() {
-  yield takeLatest("USER_LOGIN", login);
+export default function* rootSaga() {
+  yield all([...userSagas, ...resourceSagas, watchUpdateAuthHeader()]);
 }
-
-export default userSaga;
