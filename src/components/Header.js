@@ -18,13 +18,27 @@ class Header extends Component {
   render() {
     const { loggedIn } = this.props;
     return (
-      <Menu style={{ marginBottom: "40px" }}>
+      <Menu
+        style={{
+          marginBottom: "40px",
+          backgroundColor: "#484e6d",
+          color: "white"
+        }}
+      >
+        <Menu.Item position="left" name="bars" onClick={this.handleItemClicked}>
+          <Icon inverted size="big" name="bars" style={{ cursor: "pointer" }} />
+        </Menu.Item>
         <Menu.Item
           position="right"
           name="search"
           onClick={this.handleItemClicked}
         >
-          <Icon name="search" style={{ cursor: "pointer" }} />
+          <Icon
+            inverted
+            size="big"
+            name="search"
+            style={{ cursor: "pointer" }}
+          />
         </Menu.Item>
         {loggedIn ? null : (
           <Menu.Item>

@@ -15,3 +15,5 @@ export const ADD_RESOURCE = "ADD_RESOURCE";
 export const SET_RESOURCES = "SET_RESOURCES";
 // will remove this one and organize reducers
 export const SET_RESOURCE = "SET_RESOURCE";
+export const FETCH_CHANNELS = "FETCH_CHANNELS";
+export const SET_CHANNELS = "SET_CHANNELS";
