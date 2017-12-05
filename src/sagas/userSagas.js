@@ -20,7 +20,6 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
   FETCH_USER,
-  FETCH_RESOURCES,
   UPDATE_AUTH_HEADER
 } from "../constants";
 import history from "../utils/history";
@@ -48,7 +47,6 @@ function* logout(action) {
     yield localStorage.clear();
     yield put({ type: LOGOUT_SUCCESS });
     yield put({ type: UPDATE_AUTH_HEADER, payload: null });
-    yield put({ type: FETCH_RESOURCES});
   } catch (e) {
     yield put({ type: LOGOUT_ERROR, e });
   }

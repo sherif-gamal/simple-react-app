@@ -1,6 +1,5 @@
 import axios from "axios";
 
 export default {
-  fetchAll: () => [],
-  fetch: id => {id}
+  fetchAll: () => axios.get("/api/coins")
 };

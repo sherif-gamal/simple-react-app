@@ -3,13 +3,21 @@ import { connect } from "react-redux";
 import { SIGNUP } from "../constants";
 import SignupForm from "./SignupForm";
 
-class LoginPage extends Component {
+class SignupPage extends Component {
   submit = data => this.props.signup(data);
 
   render() {
+    const { location, signupError } = this.props;
+    const emailAddress = location.state
+      ? location.state.emailAddress
+      : undefined;
     return (
       <div>
-        <SignupForm submit={this.submit} signupError={this.props.signupError} />
+        <SignupForm
+          emailAddress={emailAddress}
+          submit={this.submit}
+          signupError={signupError}
+        />
       </div>
     );
   }
@@ -19,10 +27,8 @@ const mapDispatchToProps = dispatch => ({
   signup: data => dispatch({ type: SIGNUP, payload: data })
 });
 
-const mapStateToProps = state => {
-  return {
-    signupError: state.user.signupError
-  };
-};
+const mapStateToProps = state => ({
+  signupError: state.user.signupError
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

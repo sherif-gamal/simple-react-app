@@ -1,7 +1,7 @@
 import { all, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import userSagas from "./userSagas";
-import resourceSagas from "./resourceSagas";
+import coinSagas from "./coinsSagas";
 import { UPDATE_AUTH_HEADER } from "../constants";
 
 function* watchUpdateAuthHeader() {
@@ -12,5 +12,5 @@ function* watchUpdateAuthHeader() {
 }
 
 export default function* rootSaga() {
-  yield all([...userSagas, ...resourceSagas, watchUpdateAuthHeader()]);
+  yield all([...userSagas, ...coinSagas, watchUpdateAuthHeader()]);
 }

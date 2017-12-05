@@ -5290,6 +5290,12 @@ react-scripts@1.0.17:
   optionalDependencies:
     fsevents "1.1.2"
 
+react-stripe-elements@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-1.2.1.tgz#1e385fe645494e492b79ae04f67658b1020cfa25"
+  dependencies:
+    prop-types "^15.5.10"
+
 react@^16.1.1:
   version "16.1.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.1.1.tgz#d5c4ef795507e3012282dd51261ff9c0e824fe1f"

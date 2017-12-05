@@ -9,11 +9,9 @@ export const SIGNUP = "SIGNUP";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_ERROR = "SIGNUP_ERROR";
 export const FETCH_USER = "FETCH_USER";
-export const FETCH_RESOURCES = "FETCH_RESOURCES";
-export const FETCH_RESOURCE = "FETCH_RESOURCE";
-export const ADD_RESOURCE = "ADD_RESOURCE";
-export const SET_RESOURCES = "SET_RESOURCES";
-// will remove this one and organize reducers
-export const SET_RESOURCE = "SET_RESOURCE";
-export const FETCH_CHANNELS = "FETCH_CHANNELS";
-export const SET_CHANNELS = "SET_CHANNELS";
+export const FETCH_COINS = "FETCH_COINS";
+export const SET_COINS = "SET_COINS";
+export const FETCH_COIN = "FETCH_COIN";
+export const SET_COIN = "SET_COIN";
+export const SET_WALLETS = "SET_WALLETS";
+export const API_ERROR = "API_ERROR";

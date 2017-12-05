@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-  signup: data => axios.post("/api/Users", data),
-  login: credentials => axios.post("/api/Users/login", credentials),
+  signup: data => axios.post("/api/users", data),
+  login: credentials => axios.post("/api/users/login", credentials),
   logout: () => {
     // todo fix
     const token = localStorage.getItem("token");

@@ -49,6 +49,7 @@ class SignupForm extends Component {
 
   render() {
     const { errors } = this.state;
+    const { emailAddress, signupError } = this.props;
     return (
       <div>
         <Grid
@@ -63,12 +64,10 @@ class SignupForm extends Component {
               maxWidth: 600
             }}
           >
-            <Header as="h2" color="teal" textAlign="center">
-              Sign up to Coach Jenny
-            </Header>
+            <h2>Sign up to Bitmate</h2>
             <Form size="large">
               <Segment stacked>
-                {this.props.signupError && <InlineMessage text={this.props.signupError} />}
+                {signupError && <InlineMessage text={signupError} />}
                 <Form.Input
                   fluid
                   icon="user"
@@ -85,6 +84,7 @@ class SignupForm extends Component {
                   name="email"
                   error={!!errors.email}
                   onChange={this.onChange}
+                  defaultValue={emailAddress}
                 />
 
                 <Form.Input
@@ -97,15 +97,13 @@ class SignupForm extends Component {
                   onChange={this.onChange}
                 />
 
-                <Button color="teal" fluid size="large" onClick={this.onSubmit}>
+                <Button positive fluid size="large" onClick={this.onSubmit}>
                   Signup
                 </Button>
               </Segment>
             </Form>
-            <Message>
-              Already a member?
-              <a href="/login"> Login instead</a>
-            </Message>
+            <span>Already a member?</span>
+            <a href="/login"> Login instead</a>
           </Grid.Column>
         </Grid>
       </div>

@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
+import coinReducer from "./coinsReducer";
 import userReducer from "./userReducer";
-import resourceReducer from "./resourceReducer";
-import channelReducer from "./channelReducer";
 
 export default combineReducers({
   user: userReducer,
-  resources: resourceReducer,
-  channels: channelReducer,
+  coins: coinReducer,
   router: routerReducer
 });

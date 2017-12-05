@@ -1,21 +1,25 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import React, { PureComponent } from "react";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { Switch } from "react-router-dom";
+import PropTypes from "prop-types";
 import Header from "./components/Header";
-import { HomePage, LoginPage, SignupPage, PageNotFound } from "./containers";
+import { LoginPage, SignupPage, PageNotFound } from "./containers";
+import HomePage from "./components/HomePage";
+import Coins from "./containers/Coins";
+import history from "./utils/history";
+import styles from "./styles";
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
-      <div>
-        <Header loggedIn={!!this.props.user.token} />
+      <div style={{ background: styles.themeColor }}>
+        <Header history={history} loggedIn={this.props.loggedIn} />
         <div className="ui container">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignupPage} />
-            <Route path="/share" component={() => <strong>I shall display the url here</strong>} />
+            <Route path="/coins" component={Coins} />
 
             <Route path="*" component={PageNotFound} />
           </Switch>
@@ -25,6 +29,9 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  loggedIn: PropTypes.bool.isRequired
+};
 const mapStateToProps = state => ({
   ...state
 });

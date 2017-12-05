@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Menu, Icon, Input } from "semantic-ui-react";
+import { Menu, Icon, Input, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { LOG_OUT } from "../constants";
+import styles from "../styles";
 
 class Header extends Component {
   handleItemClicked = (e, { name }) => {
@@ -19,38 +20,40 @@ class Header extends Component {
     const { loggedIn } = this.props;
     return (
       <Menu
+        borderless
         style={{
           marginBottom: "40px",
-          backgroundColor: "#484e6d",
-          color: "white"
+          background: styles.themeColor
         }}
       >
-        <Menu.Item position="left" name="bars" onClick={this.handleItemClicked}>
-          <Icon inverted size="big" name="bars" style={{ cursor: "pointer" }} />
+        <Menu.Item
+          as="div"
+          position="left"
+          name="bars"
+          onClick={this.handleItemClicked}
+          style={{ color: "white" }}
+        >
+          <Link to="/">Bitmate</Link>
         </Menu.Item>
         <Menu.Item
+          as="div"
           position="right"
-          name="search"
           onClick={this.handleItemClicked}
+          style={{ color: "white" }}
         >
-          <Icon
-            inverted
-            size="big"
-            name="search"
-            style={{ cursor: "pointer" }}
-          />
+          <Link to="/coins">Buy/Sell</Link>
         </Menu.Item>
         {loggedIn ? null : (
-          <Menu.Item>
+          <Menu.Item as="div">
             <Link to="/login">Login</Link>
           </Menu.Item>
         )}
         {loggedIn ? (
-          <Menu.Item name="logout" onClick={this.handleItemClicked}>
+          <Menu.Item as="div" name="logout" onClick={this.handleItemClicked}>
             <button className="button primary">Logout</button>
           </Menu.Item>
         ) : (
-          <Menu.Item>
+          <Menu.Item as="div">
             <Link to="/signup">Signup</Link>
           </Menu.Item>
         )}

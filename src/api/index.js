@@ -1,3 +1,3 @@
 export { default as Users } from "./user";
-export { default as Resources } from "./resources";
-export { default as Channles } from "./channels";
+export { default as Coins } from "./coins";
+export { default as Wallets } from "./wallets";

@@ -16,12 +16,13 @@ export default function configureStore(history) {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
   /* eslint-enable */
 
+  const token = localStorage.getItem("token");
   const store = createStore(
     reducers,
+    { loggedIn: !token },
     composeSetup(applyMiddleware(...middlewares))
   );
   sagaMiddleware.run(rootSaga);
-  const token = localStorage.getItem("token");
   if (token) {
     store.dispatch({ type: UPDATE_AUTH_HEADER, payload: token });
   }
