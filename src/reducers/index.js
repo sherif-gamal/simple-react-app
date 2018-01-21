@@ -1,10 +1,20 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
-import coinReducer from "./coinsReducer";
-import userReducer from "./userReducer";
+import coins from "./coinsReducer";
+import { token, user } from "./userReducer";
+import { redirectUrl } from "./appReducer";
+import ui from "./uiReducer";
+import checkout from "./checkout";
+
+import errors from "./errorReducer";
 
 export default combineReducers({
-  user: userReducer,
-  coins: coinReducer,
-  router: routerReducer
+  router: routerReducer,
+  user,
+  token,
+  coins,
+  errors,
+  ui,
+  checkout,
+  redirectUrl
 });

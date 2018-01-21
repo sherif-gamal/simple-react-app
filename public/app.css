@@ -1,5 +1,5 @@
 * {
-  /*font-family: fantasy !important;*/
+  font-family: monospace;
 }
 
 a {
@@ -7,5 +7,9 @@ a {
 }
 
 table a {
+  color: lightblue !important;
+}
+
+a.dark {
   color: lightblue !important;
 }

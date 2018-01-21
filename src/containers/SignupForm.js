@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import {
-  Form,
-  Button,
-  Grid,
-  Header,
-  Segment,
-  Message
-} from "semantic-ui-react";
+import { Form, Button, Grid, Segment } from "semantic-ui-react";
+import PropTypes from "prop-types";
 import validator from "validator";
 import InlineMessage from "../components/InlineMessage";
 
 class SignupForm extends Component {
+  static propTypes = {
+    prefilledEmail: PropTypes.string,
+    signupError: PropTypes.string,
+    submit: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    prefilledEmail: null,
+    signupError: null
+  };
   state = {
     data: {
       name: "",
@@ -49,7 +53,7 @@ class SignupForm extends Component {
 
   render() {
     const { errors } = this.state;
-    const { emailAddress, signupError } = this.props;
+    const { prefilledEmail, signupError } = this.props;
     return (
       <div>
         <Grid
@@ -84,7 +88,7 @@ class SignupForm extends Component {
                   name="email"
                   error={!!errors.email}
                   onChange={this.onChange}
-                  defaultValue={emailAddress}
+                  defaultValue={prefilledEmail}
                 />
 
                 <Form.Input
@@ -97,13 +101,12 @@ class SignupForm extends Component {
                   onChange={this.onChange}
                 />
 
-                <Button positive fluid size="large" onClick={this.onSubmit}>
+                <Button primary fluid size="large" onClick={this.onSubmit}>
                   Signup
                 </Button>
               </Segment>
             </Form>
-            <span>Already a member?</span>
-            <a href="/login"> Login instead</a>
+            <a href="/login">Login to your account instead</a>
           </Grid.Column>
         </Grid>
       </div>

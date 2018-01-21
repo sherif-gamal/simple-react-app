@@ -8,6 +8,7 @@ import createStore from "./store";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import history from "./utils/history";
+import config from "./config";
 
 const store = createStore(history);
 

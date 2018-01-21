@@ -1,8 +1,46 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Form, Button } from "semantic-ui-react";
 import "../styles/homePage.css";
 
+const LoggedInHome = () => <div>Welcome to Bitmate</div>;
+
+const NonLoggedInHome = () => (
+  <div>
+    <Form>
+      <Form.Group
+        style={{
+          padding: "20px",
+          margin: "auto",
+          justifyContent: "center"
+        }}
+      >
+        <Form.Input
+          style={{ width: "300px", height: "55px" }}
+          placeholder="Email Address"
+          onChange={(e, { value }) => this.setState({ emailAddress: value })}
+        />
+        <Button
+          type="submit"
+          primary
+          className="huge"
+          style={{ border: "1px solid" }}
+          onClick={this.getStarted}
+        >
+          Get Started
+        </Button>
+      </Form.Group>
+    </Form>
+  </div>
+);
+
 class HomePage extends Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func
+    }).isRequired
+  };
   state = {
     emailAddress: ""
   };
@@ -15,9 +53,11 @@ class HomePage extends Component {
   };
 
   render() {
+    const { token } = this.props;
     return (
       <main style={{ textAlign: "center" }}>
         <h1>The easiest way to buy and sell cryptocurrency in Australia</h1>
+
         <div
           style={{
             margin: "auto",
@@ -25,36 +65,15 @@ class HomePage extends Component {
             width: "50%"
           }}
         >
-          <Form>
-            <Form.Group
-              style={{
-                padding: "20px",
-                margin: "auto",
-                justifyContent: "center"
-              }}
-            >
-              <Form.Input
-                style={{ width: "300px", height: "55px" }}
-                placeholder="Email Address"
-                onChange={(e, { value }) =>
-                  this.setState({ emailAddress: value })
-                }
-              />
-              <Button
-                type="submit"
-                primary
-                className="huge"
-                style={{ border: "1px solid" }}
-                onClick={this.getStarted}
-              >
-                Get Started
-              </Button>
-            </Form.Group>
-          </Form>
+          {token ? <LoggedInHome /> : <NonLoggedInHome />}
         </div>
       </main>
     );
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+  token: state.token
+});
+
+export default connect(mapStateToProps)(HomePage);

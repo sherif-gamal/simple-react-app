@@ -62,12 +62,9 @@ class LoginForm extends Component {
               maxWidth: 600
             }}
           >
-            <Header as="h2" color="teal" textAlign="center">
-              Login
-            </Header>
+            <h2>Login to Bitmate</h2>
             <Form size="large">
               <Segment stacked>
-                {this.props.error && <InlineMessage text={this.props.error} />}
                 <Form.Input
                   fluid
                   icon="mail"
@@ -86,16 +83,20 @@ class LoginForm extends Component {
                   error={!!errors.password}
                   onChange={this.onChange}
                 />
-
-                <Button color="teal" fluid size="large" onClick={this.onSubmit}>
+                <Button primary fluid size="large" onClick={this.onSubmit}>
                   Submit
                 </Button>
+                {this.props.error && (
+                  <Message negative>
+                    <Message.Header>
+                      There was a problem logging you in
+                    </Message.Header>
+                    <p>{this.props.error}</p>
+                  </Message>
+                )}
               </Segment>
             </Form>
-            <Message>
-              Don't have an account?
-              <a href="/signup"> Create one</a>
-            </Message>
+            <a href="/signup">Create an account instead</a>
           </Grid.Column>
         </Grid>
       </div>

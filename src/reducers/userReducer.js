@@ -1,37 +1,34 @@
 import {
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
-  SIGNUP_ERROR,
-  LOGIN_ERROR
+  SET_USER,
+  SET_TOKEN,
+  ID_SENT,
+  ADDRESS_SENT,
+  SMS_SENT,
+  PHONE_VERIFIED
 } from "../constants";
 
-const userId = localStorage.getItem("userId");
-const token = localStorage.getItem("token");
-const initialState = {
-  account: undefined,
-  loginError: undefined,
-  signupError: undefined,
-  userId,
-  token
-};
-
-export default function userReducer(state = initialState, action) {
-  let newState;
+export function user(state = null, action) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
-      newState = {
-        ...state,
-        token: action.payload.id,
-        userId: action.payload.userId
-      };
-      delete newState.loginError;
-      return newState;
-    case LOGOUT_SUCCESS:
-      return {};
-    case SIGNUP_ERROR:
-      return { ...state, signupError: action.error };
-    case LOGIN_ERROR:
-      return { ...state, loginError: action.error };
+    case SET_USER:
+      return action.payload;
+    case SMS_SENT:
+      return { ...state, phoneVerification: "P" };
+    case PHONE_VERIFIED:
+      return { ...state, phoneVerification: "V" };
+    case ID_SENT:
+      return { ...state, idVerification: "P" };
+    case ADDRESS_SENT:
+      return { ...state, addressVerification: "P" };
+    default:
+      return state;
+  }
+}
+
+const accessToken = localStorage.getItem("token");
+export function token(state = accessToken, action) {
+  switch (action.type) {
+    case SET_TOKEN:
+      return action.payload;
     default:
       return state;
   }

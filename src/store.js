@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import { routerMiddleware } from "react-router-redux";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
-import { UPDATE_AUTH_HEADER } from "./constants";
+import { INIT } from "./constants";
 
 export default function configureStore(history) {
   const sagaMiddleware = createSagaMiddleware();
@@ -19,12 +19,11 @@ export default function configureStore(history) {
   const token = localStorage.getItem("token");
   const store = createStore(
     reducers,
-    { loggedIn: !token },
     composeSetup(applyMiddleware(...middlewares))
   );
   sagaMiddleware.run(rootSaga);
   if (token) {
-    store.dispatch({ type: UPDATE_AUTH_HEADER, payload: token });
+    store.dispatch({ type: INIT, payload: token });
   }
   return store;
 }

@@ -1,9 +1,22 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SIGNUP } from "../constants";
 import SignupForm from "./SignupForm";
 
 class SignupPage extends Component {
+  static propTypes = {
+    location: PropTypes.shape({
+      state: PropTypes.string
+    }).isRequired,
+    signupError: PropTypes.string,
+    signup: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    signupError: null
+  };
+
   submit = data => this.props.signup(data);
 
   render() {
@@ -14,7 +27,7 @@ class SignupPage extends Component {
     return (
       <div>
         <SignupForm
-          emailAddress={emailAddress}
+          prefilledEmail={emailAddress}
           submit={this.submit}
           signupError={signupError}
         />
@@ -28,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  signupError: state.user.signupError
+  signupError: state.errors.SIGNUP_ERROR
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupPage);

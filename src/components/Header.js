@@ -50,7 +50,7 @@ class Header extends Component {
         )}
         {loggedIn ? (
           <Menu.Item as="div" name="logout" onClick={this.handleItemClicked}>
-            <button className="button primary">Logout</button>
+            <Link to="#">Logout</Link>
           </Menu.Item>
         ) : (
           <Menu.Item as="div">
