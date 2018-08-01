@@ -44,9 +44,9 @@ class UploadID extends Component {
   doUpload = () => {
     const { docType, idFront, idBack, passport } = this.state;
     if (docType === "id") {
-      this.props.uploadId(idFront, idBack);
+      this.props.uploadId({ idFront, idBack });
     } else {
-      this.props.uploadId(passport);
+      this.props.uploadId({ passport });
     }
   };
 
@@ -189,7 +189,7 @@ const mapStateToProps = state => ({
   idSending: state.ui.idSending
 });
 const mapDispatchToProps = dispatch => ({
-  uploadId: (...files) =>
+  uploadId: files =>
     dispatch({
       type: UPLOAD_ID,
       payload: files

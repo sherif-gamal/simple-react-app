@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import {
-  Form,
-  Button,
-  Grid,
-  Header,
-  Segment,
-  Message
-} from "semantic-ui-react";
+import PropTypes from "prop-types";
+import { Form, Button, Grid, Segment, Message } from "semantic-ui-react";
 import validator from "validator";
-import InlineMessage from "../components/InlineMessage";
 
 class LoginForm extends Component {
+  static propTypes = {
+    emailVerified: PropTypes.bool
+  };
+  static defaultProps = {
+    emailVerified: false
+  };
   state = {
     data: {
       email: "",
@@ -63,6 +62,12 @@ class LoginForm extends Component {
             }}
           >
             <h2>Login to Bitmate</h2>
+            {this.props.emailVerified ? (
+              <Message success>
+                <Message.Header>Email verification successful</Message.Header>
+                Your email address has been verified successfully
+              </Message>
+            ) : null}
             <Form size="large">
               <Segment stacked>
                 <Form.Input

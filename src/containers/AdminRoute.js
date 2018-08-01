@@ -3,31 +3,31 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, user, ...rest }) => (
+const AdminRoute = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      user ? (
+      user && user.admin ? (
         <Component {...props} />
       ) : (
         <Redirect
           to={{
-            pathname: "/login"
+            pathname: "/login",
+            state: { from: "/" }
           }}
-          push
         />
       )
     }
   />
 );
 
-ProtectedRoute.propTypes = {
+AdminRoute.propTypes = {
   token: PropTypes.string,
   user: PropTypes.shape(),
-  component: PropTypes.func.isRequired
+  component: PropTypes.shape({}).isRequired
 };
 
-ProtectedRoute.defaultProps = {
+AdminRoute.defaultProps = {
   token: null,
   user: null
 };
@@ -37,4 +37,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(ProtectedRoute);
+export default connect(mapStateToProps)(AdminRoute);

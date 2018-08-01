@@ -30,14 +30,9 @@ class CheckoutModal extends PureComponent {
   componentWillMount() {
     this.props.getClientToken();
   }
-
-  coinOptions = () =>
-    this.props.coins.map(coin => ({
-      key: coin.id,
-      value: coin.id,
-      text: `${coin.name}`,
-      image: coin.logo
-    }));
+  setAmount = ({ target: { value } }) => {
+    this.setState({ amout: value });
+  };
 
   proceed = () => {
     switch (this.state.activeStep) {
@@ -55,9 +50,14 @@ class CheckoutModal extends PureComponent {
     }
   };
 
-  setAmount = ({ target: { value } }) => {
-    this.setState({ amout: value });
-  };
+  coinOptions = () =>
+    this.props.coins.map(coin => ({
+      key: coin.id,
+      value: coin.id,
+      text: `${coin.name}`,
+      image: coin.logo
+    }));
+
   render() {
     const { checkout: { clientToken }, close, coins } = this.props;
     const { activeStep, step, amount } = this.state;
@@ -127,6 +127,7 @@ class CheckoutModal extends PureComponent {
             </form>
           );
           break;
+        case "success":
         default:
           break;
       }

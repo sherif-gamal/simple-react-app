@@ -3,7 +3,7 @@ import { Message } from "semantic-ui-react";
 
 const AccountCreated = props => (
   <main style={{ textAlign: "center" }}>
-    <Message success massive>
+    <Message success size="big">
       <Message.Header>Account created successfully</Message.Header>
       We sent you an email with a confirmation link, please click that link to
       verify your email address. then click{" "}

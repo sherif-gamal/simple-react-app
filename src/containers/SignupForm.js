@@ -71,15 +71,22 @@ class SignupForm extends Component {
             <h2>Sign up to Bitmate</h2>
             <Form size="large">
               <Segment stacked>
-                {signupError && <InlineMessage text={signupError} />}
-                <Form.Input
-                  fluid
-                  icon="user"
-                  placeholder="Jane Doe"
-                  name="name"
-                  error={!!errors.firstName}
-                  onChange={this.onChange}
-                />
+                <Form.Group widths="equal">
+                  <Form.Input
+                    icon="user"
+                    placeholder="Jane"
+                    name="firstName"
+                    error={!!errors.firstName}
+                    onChange={this.onChange}
+                  />
+                  <Form.Input
+                    icon="user"
+                    placeholder="Doe"
+                    name="lastName"
+                    error={!!errors.lastName}
+                    onChange={this.onChange}
+                  />
+                </Form.Group>
 
                 <Form.Input
                   fluid

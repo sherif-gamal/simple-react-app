@@ -1,0 +1,20 @@
+.logo-bitcoin-cash, .logo-bitcoin-gold, .logo-bitcoin, .logo-cardano, .logo-dash,
+.logo-ethereum-classic, .logo-ethereum, .logo-litecoin, .logo-monero, .logo-neo,
+.logo-nxt, .logo-omisego, .logo-ripple, .logo-verge, .logo-zcash
+{ display: inline-block; background: url('png.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+
+.logo-bitcoin-cash { background-position: -1px -0px; width: 32px; height: 32px; }
+.logo-bitcoin-gold { background-position: -34px -0px; width: 32px; height: 32px; }
+.logo-bitcoin { background-position: -67px -0px; width: 32px; height: 32px; }
+.logo-cardano { background-position: -1px -33px; width: 32px; height: 32px; }
+.logo-dash { background-position: -34px -33px; width: 32px; height: 32px; }
+.logo-ethereum-classic { background-position: -67px -33px; width: 32px; height: 32px; }
+.logo-ethereum { background-position: -1px -66px; width: 32px; height: 32px; }
+.logo-litecoin { background-position: -34px -66px; width: 32px; height: 32px; }
+.logo-monero { background-position: -67px -66px; width: 32px; height: 32px; }
+.logo-neo { background-position: -1px -99px; width: 32px; height: 32px; }
+.logo-nxt { background-position: -34px -99px; width: 32px; height: 32px; }
+.logo-omisego { background-position: -67px -99px; width: 32px; height: 32px; }
+.logo-ripple { background-position: -1px -132px; width: 32px; height: 32px; }
+.logo-verge { background-position: -34px -132px; width: 32px; height: 32px; }
+.logo-zcash { background-position: -67px -132px; width: 32px; height: 32px; }

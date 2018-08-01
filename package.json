@@ -22,6 +22,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "react-telephone-input": "^4.3.4",
+    "react-virtualized": "^9.18.0",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
@@ -43,8 +44,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "react-scripts build && ./deploy",
+    "build": "PUBLIC_URL=/app react-scripts build",
+    "deploy": "PUBLIC_URL=/app react-scripts build && ./deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

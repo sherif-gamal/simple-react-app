@@ -39,6 +39,8 @@ export const SET_CLIENT_TOKEN = "SET_CLIENT_TOKEN";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const VERIFY_EMAIL = "VERIFY_EMAIL";
+export const APP_READY = "APP_READY";
+export const EMAIL_VERIFICATION = "EMAIL_VERIFICATION";
 
 export const SET_TOKEN = "SET_TOKEN";
 export const INIT = "INIT";

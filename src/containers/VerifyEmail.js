@@ -8,13 +8,16 @@ import { VERIFY_EMAIL } from "../constants";
 class VerifyEmail extends Component {
   static propTypes = {
     history: PropTypes.shape().isRequired,
+    match: PropTypes.shape().isRequired,
     verifyEmail: PropTypes.func.isRequired,
     loggedIn: PropTypes.bool,
+    emailVerification: PropTypes.string,
     error: PropTypes.string
   };
 
   static defaultProps = {
     loggedIn: false,
+    emailVerification: "loading",
     error: null
   };
 
@@ -27,7 +30,7 @@ class VerifyEmail extends Component {
   componentWillMount() {
     const {
       history,
-      history: { match: token },
+      match: { params: { token } },
       verifyEmail,
       loggedIn
     } = this.props;
@@ -39,17 +42,20 @@ class VerifyEmail extends Component {
   }
 
   render() {
-    const { error } = this.props;
+    const { error, emailVerification } = this.props;
     return (
       <div>
-        {error ? (
-          <Message negative>
-            <Message.Header>We could not verify your email</Message.Header>
-            <p>{error}</p>
-          </Message>
-        ) : (
-          <LoadingSection />
-        )}
+        {(emailVerification === "loading" && (
+          <LoadingSection active style={{ top: "40%", height: "100px" }} />
+        )) ||
+          (error && (
+            <main style={{ textAlign: "center" }}>
+              <Message negative size="big">
+                <Message.Header>We could not verify your email</Message.Header>
+                <p>{error}</p>
+              </Message>
+            </main>
+          ))}
       </div>
     );
   }
@@ -57,7 +63,8 @@ class VerifyEmail extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: !!state.token,
-  error: state.errors.verifyEmail
+  error: state.errors.verifyEmail,
+  emailVerification: state.appState.emailVerification
 });
 
 const mapDispatchToProps = dispatch => ({

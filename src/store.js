@@ -22,8 +22,6 @@ export default function configureStore(history) {
     composeSetup(applyMiddleware(...middlewares))
   );
   sagaMiddleware.run(rootSaga);
-  if (token) {
-    store.dispatch({ type: INIT, payload: token });
-  }
+  store.dispatch({ type: INIT, payload: token });
   return store;
 }

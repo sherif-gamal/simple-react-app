@@ -1,9 +1,13 @@
-import { SET_REDIRECT_URL } from "../constants";
+import { SET_REDIRECT_URL, APP_READY, EMAIL_VERIFICATION } from "../constants";
 
-export function redirectUrl(state = null, action) {
+export default function appState(state = {}, action) {
   switch (action.type) {
     case SET_REDIRECT_URL:
-      return action.payload;
+      return { ...state, redirectUrl: action.payload };
+    case APP_READY:
+      return { ...state, appReady: true };
+    case EMAIL_VERIFICATION:
+      return { ...state, emailVerification: action.payload };
     default:
       return state;
   }

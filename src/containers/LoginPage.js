@@ -7,17 +7,22 @@ import LoginForm from "./LoginForm";
 class LoginPage extends Component {
   static propTypes = {
     errors: PropTypes.shape({}).isRequired,
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    location: PropTypes.shape().isRequired
   };
   state = {};
 
   submit = data => this.props.login(data);
 
   render() {
-    const { errors } = this.props;
+    const { errors, location: { state } } = this.props;
     return (
       <div>
-        <LoginForm submit={this.submit} error={errors.login} />
+        <LoginForm
+          submit={this.submit}
+          error={errors.login}
+          emailVerified={state && state.verified}
+        />
       </div>
     );
   }

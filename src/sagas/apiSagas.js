@@ -42,6 +42,8 @@ import {
   SET_CLIENT_TOKEN,
   ERROR_VERIFYING_PHONE,
   CLEAR_ERROR,
+  EMAIL_VERIFICATION,
+  APP_READY,
   VERIFY_EMAIL
 } from "../constants";
 
@@ -99,12 +101,13 @@ function* setToken(action) {
   } else {
     axios.defaults.headers.common.Authorization = action.payload;
     localStorage.setItem("token", action.payload);
-    yield put({ type: FETCH_USER });
+    yield fetchUser();
   }
 }
 
 function* init(action) {
   yield setToken(action);
+  yield put({ type: APP_READY });
 }
 
 function* logoutWatcher() {
@@ -135,8 +138,9 @@ function* uploadId(action) {
   const url = "/api/users/uploadId";
   const data = new FormData();
   const payload = action.payload;
-  for (let i = 0; i < payload.length; i += 1) {
-    data.append("files", payload[i]);
+  for (let i = 0; i < Object.keys(payload).length; i += 1) {
+    const key = Object.keys(payload)[i];
+    data.append(key, payload[key]);
   }
   yield put({ type: ID_SENDING });
   yield call(Api.post, url, data);
@@ -145,7 +149,7 @@ function* uploadId(action) {
 
 function* uploadAddress(action) {
   const data = new FormData();
-  data.append("file", action.payload);
+  data.append("address", action.payload);
   yield put({ type: ADDRESS_SENDING });
   yield call(Api.post, "/api/users/uploadAddress", data);
   yield put({ type: ADDRESS_SENT });
@@ -187,9 +191,10 @@ function* getClientToken(action) {
 
 function* verifyEmail(action) {
   try {
-    yield call(Api.get, "/api/users/verifyEmail");
-    yield put(push("/login"), { verified: true });
+    yield call(Api.post, "/api/users/verifyEmail", { token: action.payload });
+    yield put(push({ pathname: "/login", state: { verified: true } }));
   } catch (e) {
+    yield put({ type: EMAIL_VERIFICATION, payload: "error" });
     yield put({
       type: SET_ERROR,
       payload: { key: "verifyEmail", value: e.response.data.message }

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Header from "./components/Header";
@@ -10,8 +10,12 @@ import {
   Verify,
   ProtectedRoute,
   Modals,
-  VerifyEmail
+  VerifyEmail,
+  AdminRoute,
+  ManageUsers,
+  ManageUser
 } from "./containers";
+import LoadingSection from "./components/LoadingSection";
 import HomePage from "./components/HomePage";
 import Coins from "./containers/Coins";
 import AccountCreated from "./components/AccountCreated";
@@ -23,7 +27,8 @@ import "./styles/app.css";
 class App extends PureComponent {
   static propTypes = {
     token: PropTypes.string,
-    fetchUser: PropTypes.func.isRequired
+    fetchUser: PropTypes.func.isRequired,
+    appState: PropTypes.shape().isRequired
   };
   static defaultProps = {
     token: null
@@ -36,8 +41,7 @@ class App extends PureComponent {
     }
   }
   render() {
-    const { token } = this.props;
-    return (
+    return this.props.appState.appReady ? (
       <div style={{ background: styles.themeColor }}>
         <Header history={history} loggedIn={!!this.props.token} />
         <div className="ui container">
@@ -48,15 +52,24 @@ class App extends PureComponent {
             <Route path="/coins" component={Coins} />
             <Route path="/created" component={AccountCreated} />
             <Route path="/verifyEmail/:token" component={VerifyEmail} />
-            <ProtectedRoute token={token}>
-              <Route exact path="/verify" component={Verify} />
-            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/verify"
+              component={Verify}
+              history={history}
+            />
+            <AdminRoute exact path="/admin/users" component={ManageUsers} />
+            <AdminRoute exact path="/admin/users/:id" component={ManageUser} />
+
             <Route path="*" component={PageNotFound} />
           </Switch>
           <Modals />
         </div>
       </div>
-    );
+    ) : (
+        <div style={{ background: styles.themeColor }} />
+      );
   }
 }
 const mapStateToProps = state => ({
@@ -67,4 +80,4 @@ const mapDispatchToProps = dispatch => ({
   fetchUser: () => dispatch({ type: FETCH_USER })
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
